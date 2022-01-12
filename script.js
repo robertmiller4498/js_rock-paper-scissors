@@ -1,41 +1,69 @@
-//Rock Paper Scissors game
-//Set up well, only results in tie at the moment.
-let playerScore = 0;
-let computerScore = 0;
-let roundWinner = '';
+//CREATING FIRST FUNCTION GETUSERCHOICE WITH PARAMETER USERINPUT
 
-let playerSelection = 'ROCK' || 'PAPER' || 'SCISSORS';
-let computerSelection = 'ROCK' || 'PAPER' || 'SCISSORS';
+const getUserChoice = (userInput) => {
+    userInput = userInput.toLowerCase();
 
-function computerPlay(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return roundWinner = 'tie';
-    } else if (playerSelection > computerSelection) {
-        (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
-        (playerSelection === 'PAPER' && computerSelection === 'ROCK') ||
-        (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')
-        return roundWinner = `Player wins round! ${playerSelection} beats ${computerSelection}!`;
-    } else if (computerSelection > playerSelection) {
-        (computerSelection === 'ROCK' && playerSelection === 'SCISSORS') ||
-        (computerSelection === 'PAPER' && playerSelection === 'ROCK') ||
-        (computerSelection === 'SCISSORS' && playerSelection === 'PAPER')
-        return roundWinner = `Computer wins round! ${computerSelection} beats ${playerSelection}!`;
+    if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
+        return userInput;
     } else {
-        return roundWinner = 'Not a tie.';
+        return 'Error!';
+    }
+};
+
+//CREATING SECOND FUNCTION GETCOMPUTERINPUT WITH NO PARAMETERS
+
+const getComputerChoice = () => {
+   const randomNumber = Math.floor(Math.random() * 3);
+
+    switch(randomNumber) {
+        case 0:
+            return 'rock';
+        case 1:
+            return 'paper';
+        case 2:
+            return 'scissors';
+    }
+};
+
+//CREATING FUNCTION DETERMINEWINNER WHICH USES PARAMETERS USERCHOICE & COMPUTERCHOICE
+
+const determineWinner = (userChoice, computerChoice) => {
+if(userChoice === computerChoice) {
+    return 'Round ends in a Tie!';
+}
+if (userChoice === 'rock') {
+    if(computerChoice === 'paper') {
+        return 'Paper beats rock! Computer Wins!';
+    } else {
+        return 'Rock beats scissors! You Win!';
     }
 }
-    function getRandomChoice () {
-        let randomNumber = Math.floor(Math.random() * 3)
-        switch (randomNumber) {
-            case 0:
-                return 'ROCK'
-            case 1:
-                return 'PAPER'
-            case 2:
-                return 'SCISSORS'
-            }
-        }
-    
+if (userChoice === 'paper') {
+    if(computerChoice === 'scissors') {
+        return 'Scissors beats paper! Computer Wins!';
+    } else {
+        return 'Paper beats rock! You win!';
+    }
+}
+if (userChoice === 'scissors') {
+    if(computerChoice === 'rock') {
+        return 'Rock beats Scissors! Computer Wins!';
+    } else {
+        return 'Scissors beats paper! You win!';
+    }
+}
+};
 
-console.log(computerPlay(playerSelection, computerSelection));
+//CREATING FUNCTION PLAYGAME() TO START THE GAME AND LOG RESULTS
+
+const playGame = () => {
+    userChoice = getUserChoice('paper');
+    computerChoice = getComputerChoice();
+    
+    console.log('You threw: ' + userChoice);
+    console.log('The computer threw: ' + computerChoice);
+    console.log(determineWinner(userChoice, computerChoice));
+};
+
+playGame();
 
